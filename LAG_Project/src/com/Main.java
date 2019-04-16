@@ -14,12 +14,11 @@ public class Main {
         definitions = processor.process();
 
         //DEBUGGING
-        System.out.println("DEFINITIONS FOUND:");
+        System.out.println("\nDEFINITIONS FOUND:");
         for(int i = 0; i < definitions.size(); i++)
         {
             System.out.println(definitions.get(i));
         }
-
 
         //generate the output files
         FileGenerator generator = new FileGenerator(definitions,args[1],genericFiles);

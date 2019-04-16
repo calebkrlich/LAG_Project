@@ -36,7 +36,7 @@ public class InFileProcessor
                         linesFetched.add(processedClass);
 
                     }
-                    if (lineRead.contains("token")) {
+                    else if (lineRead.contains("token")) {
 
                         System.out.println("Found Token definition");               //output that we found a token def
                         String[] partsOfToken = lineRead.split(" ");          //split up the token def
@@ -45,14 +45,22 @@ public class InFileProcessor
                         linesFetched.add(lineRead);
                     }
 
-                    if (lineRead.contains("ignore")) {
+                    else if (lineRead.contains("ignore")) {
 
                         System.out.println("Found ignore definition");
                         String[] partsOfIgnore = lineRead.split(" ");
                         String processedIgnore = "<" + partsOfIgnore[0] + "," + partsOfIgnore[1] + ">";
 
                         linesFetched.add(processedIgnore);
+                    }
 
+                    else if(lineRead.contains("//"))
+                    {
+                        System.out.println("Found Comment, Ignoring");
+                    }
+                    else
+                    {
+                        System.out.println("SOMETHING ELSE FOUND, Ignoring");
                     }
                     //linesFetched.add(lineRead);
 

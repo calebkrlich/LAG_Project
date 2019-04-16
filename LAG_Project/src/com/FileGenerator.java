@@ -34,9 +34,8 @@ public class FileGenerator
         {
             BufferedWriter fileWriter = new BufferedWriter(new PrintWriter(baseName + ".cpp"));
             BufferedReader fileReader = new BufferedReader(new FileReader(generics[1]));
-
-
             String readLine;
+
             while((readLine = fileReader.readLine()) != null)
             {
                 if(readLine.contains("#include"))
@@ -45,8 +44,9 @@ public class FileGenerator
                     fileWriter.write(readLine + "\n");
             }
 
-            fileWriter.close();
+            tokenGen.getTokenMatch();
 
+            fileWriter.close();
         }
         catch (Exception e)
         {
@@ -89,8 +89,7 @@ public class FileGenerator
                 }
                 else
                     fileWriter.write(readLine + "\n");
-
-
+                
             }
 
             fileWriter.close();
