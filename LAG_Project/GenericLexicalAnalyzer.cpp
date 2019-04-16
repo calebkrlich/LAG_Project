@@ -1,4 +1,4 @@
-#include "LexicalAnalyzer.h"
+#include "GenericLexicalAnalyzer.h"
 
 LexicalAnalyzer::LexicalAnalyzer(istream &input=cin)
 {

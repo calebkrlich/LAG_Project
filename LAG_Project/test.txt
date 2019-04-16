@@ -1,1 +1,6 @@
-x+y=z
+class goofer [abc]
+
+token KEYWORD (int)
+token CONST (const)
+
+ignore (1)

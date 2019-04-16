@@ -1,12 +1,11 @@
-#ifndef _LEXICALANALYZER_H_ 
-#define _LEXICALANALYZER_H_ 
+#ifndef _GENERICLEXICALANALYZER_H_
+#define _GENERICLEXICALANALYZER_H_
 #include "string"
 using namespace std;
 
 enum Token
 {
-KEYWORD, 
-CONST
+//TOKENS GO HERE
 };
 
 
