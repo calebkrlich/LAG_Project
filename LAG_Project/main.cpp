@@ -6,6 +6,8 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+    InFileProcessor inProcessor("test1.txt");
+    inProcessor.process();
 
 
     /*

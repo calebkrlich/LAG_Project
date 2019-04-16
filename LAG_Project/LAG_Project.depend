@@ -6,7 +6,7 @@
 	"istream"
 	<cstring>
 
-1555382790 source:c:\users\krlic\documents\github\lag_project\lag_project\main.cpp
+1555386255 source:c:\users\krlic\documents\github\lag_project\lag_project\main.cpp
 	<iostream>
 	"LexicalAnalyzerForCPP.h"
 	"InFileProcessor.h"
@@ -19,11 +19,19 @@
 1555378830 source:c:\users\krlic\documents\github\lag_project\lag_project\src\lexicalanalyzerforcpp.cpp
 	"LexicalAnalyzerForCPP.h"
 
-1555383284 c:\users\krlic\documents\github\lag_project\lag_project\include\infileprocessor.h
-	"string"
+1555385306 c:\users\krlic\documents\github\lag_project\lag_project\include\infileprocessor.h
+	<string>
+	<stdio.h>
+	<iostream>
+	<fstream>
 
 1555382385 source:c:\users\krlic\documents\github\lag_project\lag_project\src\filegenerator.cpp
 	"FileGenerator.h"
 
 1555382385 c:\users\krlic\documents\github\lag_project\lag_project\include\filegenerator.h
+
+1555386205 source:c:\users\krlic\documents\github\lag_project\lag_project\src\infileprocessor.cpp
+	"InFileProcessor.h"
+	<stdio.h>
+	<string.h>
 

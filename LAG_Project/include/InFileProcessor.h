@@ -1,19 +1,22 @@
 #ifndef INFILEPROCESSOR_H
 #define INFILEPROCESSOR_H
 
-#include "string"
+#include <string>
+#include <stdio.h>
+#include <iostream>
+#include <fstream>
 
 class InFileProcessor
 {
     public:
-        InFileProcessor(std::string inFile);
+        InFileProcessor(char inFile[100]);
         virtual ~InFileProcessor();
         void process();
 
     protected:
 
     private:
-        std::string fileToProcess;
+        char fileToProcess[100];
 };
 
 #endif // INFILEPROCESSOR_H
