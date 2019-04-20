@@ -1,14 +1,38 @@
 package com;
 
+import com.sun.source.tree.Tree;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+
+class Node
+{
+    private char id;
+    private List<Node> childern = new ArrayList<>();
+    private Node parent;
+
+    public Node(Node parent) {this.parent = parent;}
+    public char getId() {return id;}
+    public List<Node> getChildren() {return childern;}
+    public void setId(char id) {this.id = id;}
+    public Node getParent() {return parent;}
 
 
+    public static Node addChildren(Node parent, char id)
+    {
+        Node node = new Node(parent);
+        node.setId(id);
+        parent.getChildren().add(node);
+        return node;
+    }
+}
 
 public class DFAGenerator
 {
     String regex;
     CharSequence regexOps = "()+*?|";
-    CharSequence augmentedOperator = "()|+*?.#";
+    CharSequence augmentedOperator = "()|+*?.";
 
 
     DFAGenerator(String regex) {this.regex = regex;}
@@ -18,7 +42,7 @@ public class DFAGenerator
         DFA output = new DFA();
 
         String augmented = augementRegex();
-        buildSyntaxTree(augmented);
+        //buildSyntaxTree();
 
         return output;
     }
@@ -78,22 +102,51 @@ public class DFAGenerator
         return augmentedRegex;
     }
 
-    String buildSyntaxTree(String augmentedRegex)
+    /*
+    TODO: FINISH RECURSIVELY BUILDING TREE
+     */
+    Node buildSyntaxTree(Node inNode, String augmentedRegex)
     {
+        //create the first node
+        boolean rootNodeSet = false;
+        Node rootNode = new Node(null);
 
         //pick on the farthest to the right operator
-
         for(int i = augmentedRegex.length()-1; i > 0; i--)
         {
             if(isAugmentedOp(augmentedRegex.charAt(i)))
             {
+                if(!rootNodeSet)
+                {
+                    rootNode.setId(augmentedRegex.charAt(i));
+                    System.out.println("Root node set " + rootNode.getId());
+                    rootNodeSet = true;
+                }
+
+                //if its a concat
+                if(augmentedRegex.charAt(i) == '.')
+                {
+                    System.out.println("splitting");
+
+                    rootNode.addChildren(rootNode,augmentedRegex.charAt(i-1));
+                    rootNode.addChildren(rootNode,augmentedRegex.charAt(i+1));
+                }
+
+                else if(augmentedRegex.charAt(i) == '|')
+                {
+                    rootNode.addChildren(rootNode,'|');
+                }
                 String remaining  = augmentedRegex.substring(0,i);
                 String node = augmentedRegex.substring(i);
-                System.out.println(remaining + "   :    " + node);
+                //System.out.println(remaining + "   :    " + node);
             }
         }
 
-        return "Yes";
+        for(Node n : rootNode.getChildren())
+        {
+            System.out.println(n.getId());
+        }
+        return inNode;
     }
 
 }
