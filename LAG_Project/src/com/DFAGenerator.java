@@ -6,27 +6,33 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
 class Node
 {
     private char id;
-    private List<Node> childern = new ArrayList<>();
+    private Node leftChild;
+    private Node rightChild;
     private Node parent;
 
-    public Node(Node parent) {this.parent = parent;}
-    public char getId() {return id;}
-    public List<Node> getChildren() {return childern;}
-    public void setId(char id) {this.id = id;}
-    public Node getParent() {return parent;}
-
-
-    public static Node addChildren(Node parent, char id)
+    public Node(Node parent)
     {
-        Node node = new Node(parent);
-        node.setId(id);
-        parent.getChildren().add(node);
-        return node;
+        this.parent = parent;
+        this.leftChild = null;
+        this.rightChild = null;
     }
+    public char getId() {return id;}
+    public Node getParent() {return parent;}
+    public Node getLeftChild() {return leftChild;}
+    public Node getRightChild() {return rightChild;}
+
+
+    public void setId(char id) {this.id = id;}
+    public void setParent(Node parent) {this.parent = parent;}
+    public void setLeftChild(Node left) {this.leftChild = left;}
+    public void setRightChild(Node right) {this.rightChild = right;}
+
 }
+
 
 public class DFAGenerator
 {
@@ -42,7 +48,7 @@ public class DFAGenerator
         DFA output = new DFA();
 
         String augmented = augementRegex();
-        //buildSyntaxTree();
+        Node syntaxTree = buildSyntaxTree(augmented);
 
         return output;
     }
@@ -102,51 +108,62 @@ public class DFAGenerator
         return augmentedRegex;
     }
 
-    /*
-    TODO: FINISH RECURSIVELY BUILDING TREE
-     */
-    Node buildSyntaxTree(Node inNode, String augmentedRegex)
+    Node buildSyntaxTree(String augmentedRegex)
     {
-        //create the first node
-        boolean rootNodeSet = false;
-        Node rootNode = new Node(null);
+        Node root = new Node(null);
 
-        //pick on the farthest to the right operator
-        for(int i = augmentedRegex.length()-1; i > 0; i--)
-        {
-            if(isAugmentedOp(augmentedRegex.charAt(i)))
+        for(int i = 0; i < augmentedRegex.length(); i++) {
+
+            //if the char is a concat or OR (. or |)
+            if (augmentedRegex.charAt(i) == '.' ||
+                    augmentedRegex.charAt(i) == '|')
             {
-                if(!rootNodeSet)
+                if (i > 0 && (Character.isLetter(augmentedRegex.charAt(i - 1)) || isRegexOp(augmentedRegex.charAt(i-1))))  //change to accept classes from input
                 {
-                    rootNode.setId(augmentedRegex.charAt(i));
-                    System.out.println("Root node set " + rootNode.getId());
-                    rootNodeSet = true;
-                }
+                    System.out.println("Valid");
 
-                //if its a concat
-                if(augmentedRegex.charAt(i) == '.')
-                {
-                    System.out.println("splitting");
+                    Node newParent = new Node(null);
+                    newParent.setId(augmentedRegex.charAt(i));
 
-                    rootNode.addChildren(rootNode,augmentedRegex.charAt(i-1));
-                    rootNode.addChildren(rootNode,augmentedRegex.charAt(i+1));
-                }
+                    Node leftNode = new Node(newParent);
+                    leftNode.setId(augmentedRegex.charAt(i - 1));
 
-                else if(augmentedRegex.charAt(i) == '|')
-                {
-                    rootNode.addChildren(rootNode,'|');
+                    Node rightNode = new Node(newParent);
+                    rightNode.setId(augmentedRegex.charAt(i + 1));
+
+                    newParent.setLeftChild(leftNode);
+                    newParent.setRightChild(rightNode);
+                    root = newParent;
                 }
-                String remaining  = augmentedRegex.substring(0,i);
-                String node = augmentedRegex.substring(i);
-                //System.out.println(remaining + "   :    " + node);
+                //invalid regex
+                else {
+                    System.out.println("REGEX ERROR: NOT VALID REGEX");
+                    break;
+                }
             }
-        }
 
-        for(Node n : rootNode.getChildren())
-        {
-            System.out.println(n.getId());
+            else if (augmentedRegex.charAt(i) == '*' ||
+                        augmentedRegex.charAt(i) == '+' ||
+                        augmentedRegex.charAt(i) == '?')
+            {
+                Node newParent = new Node(null);
+                newParent.setId(augmentedRegex.charAt(i));
+
+                Node newChild = new Node(newParent);
+                root.setParent(newParent);
+
+                newChild.setLeftChild(newChild);
+
+                root = newParent;
+
+            }
+            else
+            {
+                System.out.println("Found ID, continuing");
+            }
+
         }
-        return inNode;
+        return root;
     }
 
 }

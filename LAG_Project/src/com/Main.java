@@ -24,8 +24,8 @@ public class Main {
         FileGenerator generator = new FileGenerator(definitions,args[1],genericFiles);
         generator.generateFiles();
 
-        DFAGenerator gen = new DFAGenerator("a|b");
-        gen.create();
+        //DFAGenerator gen = new DFAGenerator("(a|b)*");
+        //gen.create();
         //NFAGenerator gen = new NFAGenerator("(ab|c)");
         //gen.create();
 
