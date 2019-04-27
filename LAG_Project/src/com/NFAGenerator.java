@@ -1,6 +1,7 @@
 package com;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 class Transition
 {
@@ -59,6 +60,7 @@ public class NFAGenerator
         regexToProcess = regex;
     }
 
+
     //Handles transition to literal
     Node literal(String inChar)
     {
@@ -82,11 +84,15 @@ public class NFAGenerator
     {
         ArrayList<String> outNFA = new ArrayList<>();
 
-        
+        Stack<Character> charStack = new Stack<>();
 
 
+        for(int i = 0; i < regexToProcess.length(); i++)
+        {
+            charStack.push(regexToProcess.charAt(i));
+        }
 
-
+        System.out.println(charStack.toString());
         return outNFA;
     }
 
