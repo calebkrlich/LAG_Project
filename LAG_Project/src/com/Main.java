@@ -26,9 +26,10 @@ public class Main {
 
         //DFAGenerator gen = new DFAGenerator("(a|b)*");
         //gen.create();
-        NFAGenerator gen = new NFAGenerator("(ab)");
-        gen.create();
+        NFAGenerator gen = new NFAGenerator("a|b");
+        NFA nfa = gen.create();
 
+        nfa.printNFA();
 
     }
 }
