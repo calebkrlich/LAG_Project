@@ -1,263 +1,296 @@
 package com;
 
 import java.util.ArrayList;
-import java.util.Stack;
 
-class Transition
-{
-    public String from,to,on;
+public class NFAGenerator {
 
-    Transition(String inFrom, String inTo, String inOn)
-    {
-        from = inFrom;
-        to = inTo;
-        on = inOn;
-    }
-
-    String getString()
-    {
-        return ("(" + from + "," + to + "," + on + ")");
-    }
-
-
-
-}
-
-class Node
-{
-    ArrayList<Transition> transitions = new ArrayList<>();
-    int stateValue;
-
-    Node(int state)
-    {
-        stateValue = state;
-    }
-
-    Node()
-    {
-        stateValue = 0;
-    }
-
-    void addTransition(Transition t) {
-        transitions.add(t);
-    }
-
-    int getStateValue() {
-        return stateValue;
-    }
-
-    void addToStateValue(int value)
-    {
-        stateValue += value;
-
-        for(Transition t: transitions)
-        {
-            t.from += value;
-            t.to += value;
-        }
-    }
-
-
-    void clearTransitions() {transitions.clear();}
-
-    void printTransitions()
-    {
-        System.out.println("State " + stateValue + " transitions: ");
-
-        for(Transition t : transitions)
-        {
-            System.out.println(t.getString());
-        }
-    }
-
-}
-
-class NFA {
-
-    ArrayList<Node> nodes = new ArrayList<>();
-    int acceptingState = 0;
-
-    NFA()
-    {
-
-    }
-
-    Node getLastNode() {
-
-        int biggestNodeValue = 0;
-
-        Node biggestNode = null;
-
-        for (Node n : nodes)
-        {
-            if(n.getStateValue() > biggestNodeValue) {
-                biggestNode = n;
-                biggestNodeValue = n.getStateValue();
-            }
-        }
-
-        return biggestNode;
-    }
-
-    Node getFirstNode()
-    {
-        for(Node n : nodes)
-        {
-            if(n.getStateValue() == 0)
-                return n;
-        }
-        return new Node();  //hopefully never happen
-    }
-
-
-    NFA(String literal) //Simple NFA for a literal
-    {
-        Node startingNode = new Node(0);
-        startingNode.addTransition(new Transition("0","1",literal));
-
-        Node endingNode = new Node(1);
-
-        nodes.add(startingNode);   //entrance node
-        nodes.add(endingNode);   //ending node
-
-        acceptingState = 1;
-    }
-
-    NFA concatination(NFA first, NFA second)
-    {
-        NFA outNFA = new NFA();
-
-        Node firstLastNode = first.getLastNode();
-        Node secondFirstNode = second.getFirstNode();
-
-
-        secondFirstNode.addToStateValue(2);
-
-        firstLastNode.printTransitions();
-
-        firstLastNode.addTransition(new Transition(Integer.toString(firstLastNode.getStateValue()),
-                Integer.toString(secondFirstNode.getStateValue()),"E"));
-
-        firstLastNode.printTransitions();
-
-        first.printNFA();
-        second.printNFA();
-
-        return first;
-    }
-
-    NFA kleeneClosure(NFA input)
-    {
-        NFA out = input;
-
-
-
-        return out;
-    }
-
-    void printNFA()
-    {
-        System.out.println("NFA STATES: ");
-        for(Node n : nodes)
-        {
-            n.printTransitions();
-        }
-    }
-
-}
-
-public class NFAGenerator
-{
     String regexToProcess;
 
+    //Holds created regexs
+    ArrayList<NFA> nfaTable = new ArrayList<>();
 
-    NFAGenerator(String regex)
+    NFAGenerator(String inRegex) {
+        regexToProcess = inRegex;
+    }
+
+    NFA getNFAFromTable(int pos)
     {
-        regexToProcess = regex;
+        return nfaTable.get(pos);
     }
 
 
-    //Handles transition to literal
-    Node literal(String inChar)
+    //=======================================NFA CONNECTIONS TYPES
+    NFA kleeneClosure(NFA input)
     {
-        Node outputNode = new Node();
+        NFA outputNFA = new NFA();
 
-        Transition entryTrans = new Transition("0" , "1", inChar);
+        outputNFA.states.add(input.getLowestState());   //add the first state
+        outputNFA.printStates();
+        input.addToEachState(1);                  //add one to compensate from the first state
+        outputNFA.states.addAll(input.states);          //add the modified states
+        outputNFA.states.add(input.getHighestState() + 1 ); //add one more state at end
 
-        outputNode.addTransition(entryTrans);
-        return outputNode;
+        outputNFA.printStates();
+
+        outputNFA.transitions = input.transitions;      //copy all original tranitions
+        outputNFA.addTranition(new Transition(outputNFA.getLowestState(),input.getLowestState(), 'E'));  //add the entry
+        outputNFA.addTranition(new Transition(outputNFA.getLowestState(), outputNFA.getHighestState(), 'E'));   //add around tranisiton
+        outputNFA.addTranition(new Transition(input.getHighestState(), input.getLowestState() , 'E')); //back in transition
+        outputNFA.addTranition(new Transition(input.getHighestState(), outputNFA.getHighestState(),'E'));   //final exit
+        return outputNFA;
     }
-    ArrayList<String> create()
+
+    NFA concationation(NFA one, NFA two)
     {
-        ArrayList<String> outNFA = new ArrayList<>();
+        NFA outputNFA = new NFA();
+        outputNFA.printTransitions();
 
-        //Stacks for holding everything
-        Stack<Character> literalStack = new Stack<>();
-        Stack<Character> operatorStack = new Stack<>();
-        Stack<Character> paranStack = new Stack<>();
-        Stack<NFA> NFAStack = new Stack<>();
+        outputNFA.states = one.states;              //copy all the states from one
+        outputNFA.transitions = one.transitions;    //copy all the transitions
 
-        boolean flagAddConcatSymbol = false;
-        boolean flagPreformConcat = false;
+        two.addToEachState(one.states.size());                //update all of the second nfa's states
 
-        for(int i = 0; i < regexToProcess.length(); i++) {
+        outputNFA.addTranition(new Transition(one.getHighestState(),two.getLowestState(),'E'));
+        outputNFA.states.addAll(two.states);        //copy all of those states
+        outputNFA.transitions.addAll(two.transitions);  //and transitions
 
-            Character charAt = regexToProcess.charAt(i);
+        outputNFA.printTransitions();
 
-            //=============PUSHING STAGE==================
-            if (charAt == ')' || charAt == '(') {
-                paranStack.push(charAt);
-                flagAddConcatSymbol = false;
+        return outputNFA;
+    }
+
+
+
+    //=============================================END NFA CONNECTION TYPES
+
+
+
+
+
+
+    //Used to process substring
+    String regexToNFA(String regex) {
+
+        if(regex.length() < 2)
+        {
+            return regex;
+        }
+        else {
+
+            NFA outNFA = new NFA();
+            boolean addConcatSymbol = false;
+            String augmenetedRegex = "";
+
+            //Adding the concat symbols
+            for (int i = 0; i < regex.length(); i++) {
+                if (Character.isLetter(regex.charAt(i))) {
+
+                    if (addConcatSymbol)
+                        augmenetedRegex += ".";
+
+                    augmenetedRegex += regex.charAt(i);
+                    addConcatSymbol = true;
+                } else {
+                    addConcatSymbol = false;
+                    augmenetedRegex += regex.charAt(i);
+                }
             }
-            else if (charAt == '+' || charAt == '*' || charAt == '?' || charAt == '.' || charAt == '|') {
-                operatorStack.push(charAt);
-                flagAddConcatSymbol = false;
+
+            if(augmenetedRegex.charAt(augmenetedRegex.length() - 1) == '.')
+            {
+                augmenetedRegex =  augmenetedRegex.substring(0,augmenetedRegex.length() - 1);
             }
-            else {
-                if(flagAddConcatSymbol)
+
+            System.out.println("Concat Regex : " + augmenetedRegex);
+
+            int highestPriority = 0;    //marker for highest priority
+            int highestPriorityPosition = 0;
+            ArrayList<Character> operators = new ArrayList<>();
+
+
+            //finding the highest priority operator
+            for (int i = 0; i < augmenetedRegex.length(); i++) {
+                int currentPosPriority = -1;
+
+                if (Character.isLetter(augmenetedRegex.charAt(i))) {
+                    currentPosPriority = -1;
+                }
+                if (augmenetedRegex.charAt(i) == '|') {
+                    currentPosPriority = 0;
+                }
+                if (augmenetedRegex.charAt(i) == '.') {
+                    currentPosPriority = 1;
+                }
+                if (augmenetedRegex.charAt(i) == '*' || augmenetedRegex.charAt(i) == '+' || augmenetedRegex.charAt(i) == '?') {
+                    currentPosPriority = 2;
+                }
+
+                if (currentPosPriority > highestPriority) {
+                    highestPriority = currentPosPriority;
+                    highestPriorityPosition = i;
+                }
+            }
+
+            char highestPriorityOperator = augmenetedRegex.charAt(highestPriorityPosition);
+            System.out.println("Highest Priority Position : " + highestPriorityPosition);
+            System.out.println("Op Type : " + augmenetedRegex.charAt(highestPriorityPosition));
+
+
+            //OPERATORS===================================================================================================
+            if (highestPriorityOperator == '*') {
+                System.out.println("Kleene...");
+
+                NFA kleene = new NFA();
+                String toRemove = "";
+                String newTablePos = "";
+
+                if(Character.isLetter(augmenetedRegex.charAt(highestPriorityPosition-1)))          //if its a character
                 {
-                    operatorStack.push('.');    //add concat to ops stack
+                    NFA character = new NFA(augmenetedRegex.charAt(highestPriorityPosition - 1));
+                    kleene = kleeneClosure(character);
+
+                    kleene.printTransitions();
+                    nfaTable.add(kleene);
+                    newTablePos = String.valueOf(nfaTable.indexOf(kleene));
+                }
+                else
+                {
+                    System.out.println("Fetching processed...");
+
+                    int tablePos = Integer.parseInt(Character.toString(augmenetedRegex.charAt(highestPriorityPosition - 1)));
+                    NFA processed = nfaTable.get(tablePos);   //fetch the already processed NFA
+                    kleene = kleeneClosure(processed);
+                    newTablePos = String.valueOf(tablePos);
+                    nfaTable.add(tablePos,kleene);
                 }
 
-                NFAStack.push(new NFA(charAt.toString()));
-                flagAddConcatSymbol = true;
+                toRemove += (augmenetedRegex.charAt(highestPriorityPosition - 1) + "*");
+                augmenetedRegex = augmenetedRegex.replace(toRemove,newTablePos + ".");  //add concat in case, snipped later
             }
 
-            //===============OPERATION STAGE=============
+            if (highestPriorityOperator == '.') {
+                System.out.println("Concatinating...");
+                char charAtPosition = '#';
+                NFA first = null;
+                NFA second = null;
 
-            if(operatorStack.size() > 0) {
-                if (operatorStack.peek() == '.') {
-                    if (flagPreformConcat) {
+                char prior = augmenetedRegex.charAt(highestPriorityPosition - 1);
+                char symbol = augmenetedRegex.charAt(highestPriorityPosition);
+                char next = augmenetedRegex.charAt(highestPriorityPosition + 1);
 
-                        System.out.println("preforming concat");
-                        NFA out = new NFA();
-                        NFA top = NFAStack.pop();
-                        NFA second = NFAStack.pop();
+                if (Character.isLetter(prior)) //if the prior position has a character
+                {
+                    charAtPosition = prior; //get the last char
+                    first = new NFA(charAtPosition);                                      //create a new literal NFA
+                } else {          //if its a number
 
-                        out = new NFA().concatination(top, second);
-                    } else {
-                        System.out.println("Not Preforming concat");
-                        flagPreformConcat = true;
-                    }
+                    System.out.println("fetching from table...");
+                    int nfaTablePosition = Integer.parseInt(    //pass that reference to nfa
+                            augmenetedRegex.substring(highestPriorityPosition - 1, highestPriorityPosition));
+                    first = nfaTable.get(nfaTablePosition); //get that nfa in the table;
                 }
-                if (operatorStack.peek() == '?') {
 
+                if (Character.isLetter(next)) {
+                    charAtPosition = next;
+                    second = new NFA(charAtPosition);
+                } else {
+                    int tablePos = Integer.parseInt(augmenetedRegex.substring(highestPriorityPosition + 1, highestPriorityPosition + 2));
+                    second = getNFAFromTable(tablePos);
                 }
-                if (operatorStack.peek() == '+') {
 
+                outNFA = concationation(first, second);
+
+                nfaTable.add(outNFA);   //add to table for later processing
+                int posInNFATable = nfaTable.indexOf(outNFA);
+
+                CharSequence toReplace = Character.toString(prior) + Character.toString(symbol) + Character.toString(next);
+
+                System.out.println(toReplace);
+                augmenetedRegex = augmenetedRegex.replace(toReplace, Integer.toString(posInNFATable));
+
+                System.out.println("New Aug regex : " + augmenetedRegex);
+            }
+            //OPERATORS====END==============================================
+
+            return(regexToNFA(augmenetedRegex));
+        }
+    }
+
+    NFA createNFA() {
+
+        NFA out = new NFA();
+
+        boolean flagProcessParans = false;
+
+        for (int i = 0; i < regexToProcess.length(); i++) {
+            if (regexToProcess.charAt(i) == '(') {
+                int closingParan = i;
+                String toProcess = "";       //The regexToProcess part to process
+
+                System.out.println("Finding Paran...");
+
+                while (closingParan < regexToProcess.length() &&
+                        regexToProcess.charAt(closingParan) != ')') {
+                    toProcess += regexToProcess.charAt(closingParan);
+                    closingParan++;
                 }
-                if (operatorStack.peek() == '*') {
+                if (closingParan >= regexToProcess.length()) {
+                    System.out.println("ERROR! Unbalanced Closing Parans");
+                    break;
+                }
 
+                if (regexToProcess.charAt(closingParan) == ')') {
+                    System.out.println("Found Closing Paran");
+                    toProcess = regexToProcess.substring(i + 1, closingParan);
+                    System.out.println("Substring To Process : " + toProcess);
+
+                    String replacedWith = regexToNFA(toProcess);
+
+                    String toBeRemoved = "";        //Remove the processed String
+
+                    toBeRemoved += regexToProcess.charAt(i);
+                    toBeRemoved += toProcess;
+                    toBeRemoved +=regexToProcess.charAt(closingParan);
+
+                    regexToProcess =  regexToProcess.replace(toBeRemoved,replacedWith);
+
+                    System.out.println("New Regex To work with : " + regexToProcess);
                 }
             }
+            else if(regexToProcess.charAt(i) == '*')
+            {
+                System.out.println("Kleene...");
 
+                NFA kleene = new NFA();
+                String toRemove = "";
+                String newTablePos = "";
+
+                if(Character.isLetter(regexToProcess.charAt(i-1)))          //if its a character
+                {
+                    NFA character = new NFA(regexToProcess.charAt(i - 1));
+                    kleene = kleeneClosure(character);
+
+                    kleene.printTransitions();
+                    nfaTable.add(kleene);
+                    newTablePos = String.valueOf(nfaTable.indexOf(kleene));
+                }
+                else
+                {
+                    System.out.println("Fetching processed...");
+
+                    int tablePos = Integer.parseInt(Character.toString(regexToProcess.charAt(i - 1)));
+                    NFA processed = nfaTable.get(tablePos);   //fetch the already processed NFA
+                    kleene = kleeneClosure(processed);
+                    newTablePos = String.valueOf(tablePos);
+                    nfaTable.add(tablePos,kleene);
+                }
+
+                toRemove += (regexToProcess.charAt(i - 1) + "*");
+                regexToProcess = regexToProcess.replace(toRemove,newTablePos);
+            }
         }
 
-        System.out.println("Literal :" + literalStack.toString());
-        System.out.println("Ops  :" + operatorStack.toString());
-        System.out.println("Parans :" + paranStack.toString());
-
-        return outNFA;
+        out = nfaTable.get(Integer.parseInt(regexToProcess));
+        return out;  //The last bit of information in the regex to parse should be the location of the final regex
     }
-
 }
