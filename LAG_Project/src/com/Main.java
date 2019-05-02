@@ -1,35 +1,25 @@
 package com;
-import java.util.*;
 
 public class Main {
 
 
     public static void main(String[] args)
     {
-        //process the in file
-        String[] genericFiles = {"GenericLexicalAnalyzer.h","GenericLexicalAnalyzer.cpp"};
+        int unionPriority = 0;
+        int concatPriority = 1;
+        int closurePriority = 2;
 
-        InFileProcessor processor = new InFileProcessor(args[0]);
-        List<String> definitions;
-        definitions = processor.process();
 
-        //DEBUGGING
-        System.out.println("\nDEFINITIONS FOUND:");
-        for(int i = 0; i < definitions.size(); i++)
-        {
-            System.out.println(definitions.get(i));
-        }
+        String regexOne = "(a*b)";
+        String regexTwo = "(abcd)*";
+        String regexThree = "(ab|c)*";
+        String regexFinal = "(ab|c)|(efd)";
 
-        //generate the output files
-        FileGenerator generator = new FileGenerator(definitions,args[1],genericFiles);
-        generator.generateFiles();
+        NFAGenerator gen = new NFAGenerator(regexOne);
+        NFA finalNFA = gen.createNFA();
 
-        //DFAGenerator gen = new DFAGenerator("(a|b)*");
-        //gen.create();
-        NFAGenerator gen = new NFAGenerator("a|b");
-        NFA nfa = gen.create();
-
-        nfa.printNFA();
-
+        System.out.println("FINAL NFA");
+        finalNFA.printTransitions();
     }
+
 }
