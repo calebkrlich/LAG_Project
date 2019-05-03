@@ -45,4 +45,23 @@ public class TokenGenerator
         }
         return tokenMatchDefinitions;
     }
+
+    public List<String> getTokenRegexes()
+    {
+        List<String> tokenMatchDefinitions = new ArrayList<>();
+
+        System.out.println("\n Token Regexs");
+
+        for(int i = 0; i < defintions.size(); i++)
+        {
+            if(defintions.get(i).contains("token"))
+            {
+                String[] parts = defintions.get(i).split(",");
+                String[] regex = parts[2].split(">");
+                tokenMatchDefinitions.add(regex[0]);
+                //System.out.println(regex[0]);
+            }
+        }
+        return tokenMatchDefinitions;
+    }
 }

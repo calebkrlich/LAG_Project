@@ -29,6 +29,11 @@ public class Transition
         to += value;
     }
 
+    String getAsString()
+    {
+        return ("(" + from + "," + to + "," + on + ")");
+    }
+
     void print()
     {
         System.out.println("(" + from + "," + to + "," + on + ")");

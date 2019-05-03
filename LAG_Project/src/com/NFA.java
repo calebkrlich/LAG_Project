@@ -1,6 +1,7 @@
 package com;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NFA
 {
@@ -79,12 +80,23 @@ public class NFA
             t.print();
     }
 
+    ArrayList<String> getTransitionsAsStrings()
+    {
+        ArrayList<String> out = new ArrayList<>();
+        for(Transition t : transitions)
+        {
+            out.add(t.getAsString());
+        }
+        return out;
+    }
+
     void printStates()
     {
         System.out.println("States");
         for(Integer t : states)
             System.out.println(t);
     }
+
 
     int getFinalState()
     {

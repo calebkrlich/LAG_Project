@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/src/com/FileGenerator.java" line="82" />
+    <bookmark url="file://$PROJECT_DIR$/src/com/FileGenerator.java" line="84" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca7da438-3b9e-4336-9256-33e1aa7f8ec5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LAG_Project/com/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LAG_Project/com/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LAG_Project/com/NFA.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LAG_Project/com/NFA.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LAG_Project/com/NFAGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LAG_Project/com/NFAGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LAG_Project/com/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LAG_Project/com/Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LAG_Project/com/Transition.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LAG_Project/com/Transition.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/LexicalAnalyzer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LexicalAnalyzer.h" beforeDir="false" afterPath="$PROJECT_DIR$/LexicalAnalyzer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/FileGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/FileGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/InFileProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/InFileProcessor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/NFA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/NFA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/NFAGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/NFAGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/TokenGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/TokenGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Transition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Transition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.txt" beforeDir="false" afterPath="$PROJECT_DIR$/test.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -29,29 +32,86 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://D:/Java/11.0.2/lib/src.zip!/java.base/java/util/Stack.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="83" selection-start-line="83" selection-end-line="83" />
+            <state relative-caret-position="357">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/FileGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1717">
+              <caret line="125" column="36" selection-start-line="125" selection-start-column="36" selection-end-line="125" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#generateSourceFile#0;class#FileGenerator#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/TokenGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="61" column="18" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/NFAGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="399" column="43" selection-start-line="399" selection-start-column="43" selection-end-line="399" selection-end-column="43" />
+            <state relative-caret-position="697">
+              <caret line="382" selection-start-line="382" selection-end-line="382" />
               <folding>
-                <element signature="e#1994#1995#0" expanded="true" />
-                <element signature="e#2022#2023#0" expanded="true" />
+                <element signature="e#210#211#0" expanded="true" />
+                <element signature="e#250#251#0" expanded="true" />
+                <element signature="e#286#287#0" expanded="true" />
+                <element signature="e#326#327#0" expanded="true" />
+                <element signature="method#kleeneClosure#0;class#NFAGenerator#0" />
+                <element signature="method#plusClosure#0;class#NFAGenerator#0" />
+                <element signature="method#questionClosure#0;class#NFAGenerator#0" />
+                <element signature="method#concationation#0;class#NFAGenerator#0" />
+                <element signature="method#union#0;class#NFAGenerator#0" />
+                <element signature="method#regexToNFA#0;class#NFAGenerator#0" />
+                <element signature="e#2391#2428#1" />
+                <element signature="e#2928#3048#1" />
+                <element signature="e#3141#3250#1" />
+                <element signature="e#4876#6234#1" />
+                <element signature="e#9452#10826#1" />
+                <element signature="e#10853#12227#1" />
+                <element signature="e#6284#8356#1" />
+                <element signature="e#8417#10434#1" />
+                <element signature="method#createNFA#0;class#NFAGenerator#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/NFA.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="84" column="48" selection-start-line="84" selection-start-column="48" selection-end-line="84" selection-end-column="48" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -70,6 +130,7 @@
     <findStrings>
       <find>opPostition</find>
       <find>concatFlag</find>
+      <find>nfatable</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -79,18 +140,21 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/com/RegexProcessor.java" />
-        <option value="$PROJECT_DIR$/src/com/InFileProcessor.java" />
-        <option value="$PROJECT_DIR$/src/com/TokenGenerator.java" />
-        <option value="$PROJECT_DIR$/src/com/FileGenerator.java" />
         <option value="$PROJECT_DIR$/GenericLexicalAnalyzer.cpp" />
         <option value="$PROJECT_DIR$/src/com/DFA.java" />
         <option value="$PROJECT_DIR$/src/com/DFAGenerator.java" />
         <option value="$PROJECT_DIR$/src/com/NFAGenerator.java" />
+        <option value="$PROJECT_DIR$/src/com/InFileProcessor.java" />
+        <option value="$PROJECT_DIR$/src/com/Transition.java" />
+        <option value="$PROJECT_DIR$/src/com/NFA.java" />
+        <option value="$PROJECT_DIR$/src/com/TokenGenerator.java" />
+        <option value="$PROJECT_DIR$/src/com/FileGenerator.java" />
+        <option value="$PROJECT_DIR$/test.txt" />
         <option value="$PROJECT_DIR$/src/com/Main.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="32" />
     <option name="width" value="1936" />
@@ -103,6 +167,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -121,18 +186,10 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="LAG_Project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LAG_Project" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="NFAGenerator.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -201,7 +258,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1447" y="40" width="734" height="867" extended-state="0" />
+    <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Designer" order="0" />
@@ -209,16 +266,16 @@
       <window_info id="Capture Tool" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
-      <window_info content_ui="combo" id="Project" order="5" weight="0.30860534" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.31130064" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="0" weight="0.32974428" />
       <window_info anchor="bottom" id="Event Log" order="1" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="2" weight="0.32833788" />
+      <window_info anchor="bottom" id="Messages" order="2" weight="0.32827735" />
       <window_info anchor="bottom" id="Version Control" order="3" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="bottom" id="Find" order="5" />
-      <window_info anchor="bottom" id="Run" order="6" weight="0.35967302" />
-      <window_info anchor="bottom" id="Debug" order="7" weight="0.39838493" />
+      <window_info anchor="bottom" id="Run" order="6" visible="true" weight="0.35861322" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.39761648" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="10" />
@@ -236,6 +293,13 @@
     <MESSAGE value="added NFA generator" />
     <option name="LAST_COMMIT_MESSAGE" value="added NFA generator" />
   </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="lineRead.value" />
+      </configuration>
+    </watches-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/GenericLexicalAnalyzer.h">
       <provider selected="true" editor-type-id="text-editor">
@@ -244,37 +308,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GenericLexicalAnalyzer.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/RegexProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/InFileProcessor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="38" column="58" selection-start-line="38" selection-start-column="58" selection-end-line="38" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/TokenGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -296,12 +333,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/FileGenerator.java">
+    <entry file="jar://D:/Java/11.0.2/lib/src.zip!/java.base/java/util/Stack.java" />
+    <entry file="file://$PROJECT_DIR$/GenericLexicalAnalyzer.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
-          <caret line="72" column="37" selection-start-line="72" selection-start-column="37" selection-end-line="72" selection-end-column="37" />
+        <state relative-caret-position="34">
+          <caret line="2" column="52" lean-forward="true" selection-start-line="2" selection-start-column="52" selection-end-line="2" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/NFA.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="84" column="48" selection-start-line="84" selection-start-column="48" selection-end-line="84" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/NFAGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="382" selection-start-line="382" selection-end-line="382" />
+          <folding>
+            <element signature="e#210#211#0" expanded="true" />
+            <element signature="e#250#251#0" expanded="true" />
+            <element signature="e#286#287#0" expanded="true" />
+            <element signature="e#326#327#0" expanded="true" />
+            <element signature="method#kleeneClosure#0;class#NFAGenerator#0" />
+            <element signature="method#plusClosure#0;class#NFAGenerator#0" />
+            <element signature="method#questionClosure#0;class#NFAGenerator#0" />
+            <element signature="method#concationation#0;class#NFAGenerator#0" />
+            <element signature="method#union#0;class#NFAGenerator#0" />
+            <element signature="method#regexToNFA#0;class#NFAGenerator#0" />
+            <element signature="e#2391#2428#1" />
+            <element signature="e#2928#3048#1" />
+            <element signature="e#3141#3250#1" />
+            <element signature="e#4876#6234#1" />
+            <element signature="e#9452#10826#1" />
+            <element signature="e#10853#12227#1" />
+            <element signature="e#6284#8356#1" />
+            <element signature="e#8417#10434#1" />
+            <element signature="method#createNFA#0;class#NFAGenerator#0" />
           </folding>
         </state>
       </provider>
@@ -320,28 +393,78 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Transition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="33" column="56" selection-start-line="33" selection-start-column="56" selection-end-line="33" selection-end-column="56" />
+          <folding>
+            <element signature="e#595#596#0" expanded="true" />
+            <element signature="e#619#620#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/InFileProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="31" column="49" lean-forward="true" selection-start-line="31" selection-start-column="49" selection-end-line="31" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#316#317#0" expanded="true" />
+            <element signature="e#356#357#0" expanded="true" />
+            <element signature="e#399#407#0" expanded="true" />
+            <element signature="e#2666#2667#0" expanded="true" />
+            <element signature="e#2694#2695#0" expanded="true" />
+            <element signature="e#2743#2744#0" expanded="true" />
+            <element signature="e#2771#2772#0" expanded="true" />
+            <element signature="e#2839#2840#0" expanded="true" />
+            <element signature="e#2861#2862#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/TokenGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="61" column="18" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/FileGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1717">
+          <caret line="125" column="36" selection-start-line="125" selection-start-column="36" selection-end-line="125" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#generateSourceFile#0;class#FileGenerator#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/LexicalAnalyzer_ListingFile.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="7" lean-forward="true" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="28" column="49" selection-start-line="28" selection-start-column="49" selection-end-line="28" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Java/11.0.2/lib/src.zip!/java.base/java/util/Stack.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/NFAGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="399" column="43" selection-start-line="399" selection-start-column="43" selection-end-line="399" selection-end-column="43" />
+        <state relative-caret-position="357">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
           <folding>
-            <element signature="e#1994#1995#0" expanded="true" />
-            <element signature="e#2022#2023#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
         </state>
       </provider>
     </entry>

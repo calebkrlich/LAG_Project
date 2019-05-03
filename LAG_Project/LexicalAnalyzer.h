@@ -6,7 +6,8 @@ using namespace std;
 enum Token
 {
 KEYWORD, 
-CONST
+CONST, 
+DATA
 };
 
 

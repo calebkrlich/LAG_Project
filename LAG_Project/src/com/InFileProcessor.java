@@ -9,7 +9,9 @@ import java.util.*;
 public class InFileProcessor
 {
     private String fileToProcess;
-
+    List<String> tokens;
+    List<String> classes;
+    List<String> ignores;
 
     InFileProcessor(String fileName)
     {
@@ -18,7 +20,7 @@ public class InFileProcessor
 
     public List<String> process()
     {
-        List<String> linesFetched = new ArrayList<String>();    //hard coded for the win
+        List<String> linesFetched = new ArrayList<String>();
         try
         {
             String lineRead;
@@ -68,7 +70,7 @@ public class InFileProcessor
             }
             catch (IOException e)
             {
-
+                System.out.println("ERROR! Failed to open file");
             }
         }
         catch (FileNotFoundException e)
@@ -78,4 +80,20 @@ public class InFileProcessor
 
         return linesFetched;
     }
+
+    public List<String> getTokens()
+    {
+        return tokens;
+    }
+
+    public List<String> getClasses()
+    {
+        return classes;
+    }
+
+    public List<String> getIgnores()
+    {
+        return ignores;
+    }
+
 }

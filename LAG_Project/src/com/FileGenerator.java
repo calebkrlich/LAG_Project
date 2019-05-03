@@ -18,6 +18,8 @@ public class FileGenerator
         baseName = nameOutBaseName;
         generics = fileGenerics;
         tokenGen = new TokenGenerator(defs);
+
+        System.out.println(tokenGen.getTokenNames());
     }
 
     public boolean generateFiles()
@@ -105,6 +107,33 @@ public class FileGenerator
 
     private boolean generateListingFile()
     {
-        return true;
+        try {
+            BufferedWriter fileWriter = new BufferedWriter(new PrintWriter(baseName + "_ListingFile.txt"));
+            List<String> regexes = tokenGen.getTokenRegexes();
+
+
+
+            for(String s : regexes)
+            {
+                NFAGenerator nfaGen = new NFAGenerator(s);
+                fileWriter.write(s + "\n");
+
+                NFA outNFA = nfaGen.createNFA();
+
+                for(String transition : outNFA.getTransitionsAsStrings())
+                    fileWriter.write(transition + "\n");
+
+                fileWriter.write("\n");
+            }
+
+            fileWriter.close();
+            return true;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 }
