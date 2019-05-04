@@ -111,16 +111,16 @@ public class FileGenerator
             BufferedWriter fileWriter = new BufferedWriter(new PrintWriter(baseName + "_ListingFile.txt"));
             List<String> regexes = tokenGen.getTokenRegexes();
 
-
-
             for(String s : regexes)
             {
                 NFAGenerator nfaGen = new NFAGenerator(s);
                 fileWriter.write(s + "\n");
+                NFA outNFA = nfaGen.createNFA();    //Create the NFA from the input
 
-                NFA outNFA = nfaGen.createNFA();
+                DFAGenerator dfaGen = new DFAGenerator(outNFA); //create a new DFA Generator
+                DFA finalDFA = dfaGen.create();                 //generate the output dfa
 
-                for(String transition : outNFA.getTransitionsAsStrings())
+                for(String transition : finalDFA.getDFAasArrayList())
                     fileWriter.write(transition + "\n");
 
                 fileWriter.write("\n");

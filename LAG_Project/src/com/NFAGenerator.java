@@ -17,7 +17,6 @@ public class NFAGenerator {
         return nfaTable.get(pos);
     }
 
-
     //=======================================NFA CONNECTIONS TYPES
     NFA kleeneClosure(NFA input)
     {

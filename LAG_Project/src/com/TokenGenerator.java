@@ -26,8 +26,7 @@ public class TokenGenerator
         }
         return tokensCreated;
     }
-
-
+    
     public List<String> getTokenMatch()
     {
         List<String> tokenMatchDefinitions = new ArrayList<>();

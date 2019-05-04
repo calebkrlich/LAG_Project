@@ -1,7 +1,5 @@
 class goofer [abc]
 
-token KEYWORD (int)
-token CONST (const)
-token DATA (abcd*)
+token KEYWORD (abc)
 
 ignore (1)

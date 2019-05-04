@@ -1,170 +1,103 @@
 package com;
 
-import com.sun.source.tree.Tree;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
-/*
-class Node
+class DFAGenerator
 {
-    private char id;
-    private Node leftChild;
-    private Node rightChild;
-    private Node parent;
+    NFA nfaToTranslate;
+    ArrayList<Character> transitionTypes = new ArrayList<>();   //Holds the transition types/on
+    ArrayList<String> transitions = new ArrayList<>();          //Holds full transition
+    ArrayList<Integer> states = new ArrayList<>();
 
-    public Node(Node parent)
+    DFAGenerator(NFA inNFA)
     {
-        this.parent = parent;
-        this.leftChild = null;
-        this.rightChild = null;
+        nfaToTranslate = inNFA;
     }
-    public char getId() {return id;}
-    public Node getParent() {return parent;}
-    public Node getLeftChild() {return leftChild;}
-    public Node getRightChild() {return rightChild;}
 
 
-    public void setId(char id) {this.id = id;}
-    public void setParent(Node parent) {this.parent = parent;}
-    public void setLeftChild(Node left) {this.leftChild = left;}
-    public void setRightChild(Node right) {this.rightChild = right;}
+    DFA create()
+    {
+        DFA outDFA = new DFA();
+
+        transitions = nfaToTranslate.getTransitionsAsStrings();
+
+
+        //Fetches all the transition types that aren't E
+        for(String i : transitions)   //fetch the transitions
+        {
+            String[] splitParts = i.split(","); //Split the transition up
+            int fromState = Integer.parseInt("" + splitParts[0].charAt(1)); //Get the from state
+            int toState = Integer.parseInt("" + splitParts[1].charAt(0));   //get the to state
+
+            //add all possible states
+            if(!states.contains(fromState))
+                states.add(fromState);
+            if(!states.contains(toState))
+                states.add(toState);
+
+            //get the transition char
+            char transition = splitParts[2].charAt(0);
+
+            if(transition != 'E')  //add all transitions that aren't E
+            {
+                transitionTypes.add(transition);
+            }
+        }
+
+        //Build E* table
+        int eStarXSize = transitionTypes.size() + 1;
+        int eStarYSize = states.size();
+
+
+        //needs to be strings
+        String[][] eStarTable = new String[eStarXSize][eStarYSize];
+
+        for(String t : transitions) {
+            String[] splitParts = t.split(","); //Split the transition up
+            int fromState = Integer.parseInt("" + splitParts[0].charAt(1)); //Get the from state
+            int toState = Integer.parseInt("" + splitParts[1].charAt(0));   //get the to state
+            char transition = splitParts[2].charAt(0);
+
+            //fill out non E move in table first
+            if (transition != 'E')
+            {
+                int xIndex = transitionTypes.indexOf(transition);
+                int yIndex = states.indexOf(fromState);
+
+                eStarTable[xIndex][yIndex] = String.valueOf(toState);
+            }
+        }
+
+
+        //Add the basic loop back E transition
+        for(int i = 0; i < eStarYSize; i++)
+        {
+            eStarTable[eStarXSize - 1][i] = String.valueOf(states.get(i));
+        }
+
+        //find all E* transitions
+        for(String t : transitions)
+        {
+
+        }
+
+        System.out.println(transitionTypes.toString());
+        System.out.println(states.toString());
+
+        for (int i = 0; i < eStarXSize; i++)
+        {
+            for(int j = 0; j < eStarYSize; j++)
+            {
+                if(eStarTable[i][j] != null)
+                    System.out.print(eStarTable[i][j]);
+                else
+                    System.out.print('-');
+            }
+            System.out.println();
+        }
+
+        return outDFA;
+    }
+
 
 }
-
-
-public class DFAGenerator
-{
-    String regex;
-    CharSequence regexOps = "()+*?|";
-    CharSequence augmentedOperator = "()|+*?.";
-
-
-    DFAGenerator(String regex) {this.regex = regex;}
-
-    public DFA create()
-    {
-        DFA output = new DFA();
-
-        String augmented = augementRegex();
-        Node syntaxTree = buildSyntaxTree(augmented);
-
-        return output;
-    }
-
-    boolean isRegexOp(char c)
-    {
-        for(int i = 0; i < regexOps.length(); i++)
-        {
-            if(regexOps.charAt(i) == c)
-                return true;
-        }
-        return false;
-    }
-
-    boolean isAugmentedOp(char c)
-    {
-        for(int i = 0; i < augmentedOperator.length(); i++)
-        {
-            if(augmentedOperator.charAt(i) == c)
-                return true;
-        }
-        return false;
-    }
-
-
-
-    String augementRegex()
-    {
-        String augmentedRegex = new String();
-        boolean concatFlag = false;
-
-        for(int i = 0; i < regex.length(); i++)
-        {
-            //if this is the first non regex op we see
-            if(!isRegexOp(regex.charAt(i)))
-            {
-                if(concatFlag) {
-                    augmentedRegex += ".";
-                }
-                else {
-                    concatFlag = true;
-                }
-                augmentedRegex += regex.charAt(i);
-            }
-            else {
-                augmentedRegex += regex.charAt(i);
-                concatFlag = false;
-                if(regex.charAt(i) == '*' || regex.charAt(i) == '+' || regex.charAt(i) == '?')
-                    concatFlag = true;
-
-            }
-        }
-
-        augmentedRegex+=".#";
-
-        System.out.println("Augmented Regex : " + augmentedRegex);
-        return augmentedRegex;
-    }
-
-    Node buildSyntaxTree(String augmentedRegex)
-    {
-        Node root = new Node(null);
-
-        for(int i = 0; i < augmentedRegex.length(); i++) {
-
-            //if the char is a concat or OR (. or |)
-            if (augmentedRegex.charAt(i) == '.' ||
-                    augmentedRegex.charAt(i) == '|')
-            {
-                if (i > 0 && (Character.isLetter(augmentedRegex.charAt(i - 1)) || isRegexOp(augmentedRegex.charAt(i-1))))  //change to accept classes from input
-                {
-                    System.out.println("Valid");
-
-                    Node newParent = new Node(null);
-                    newParent.setId(augmentedRegex.charAt(i));
-
-                    Node leftNode = new Node(newParent);
-                    leftNode.setId(augmentedRegex.charAt(i - 1));
-
-                    Node rightNode = new Node(newParent);
-                    rightNode.setId(augmentedRegex.charAt(i + 1));
-
-                    newParent.setLeftChild(leftNode);
-                    newParent.setRightChild(rightNode);
-                    root = newParent;
-                }
-                //invalid regex
-                else {
-                    System.out.println("REGEX ERROR: NOT VALID REGEX");
-                    break;
-                }
-            }
-
-            else if (augmentedRegex.charAt(i) == '*' ||
-                        augmentedRegex.charAt(i) == '+' ||
-                        augmentedRegex.charAt(i) == '?')
-            {
-                Node newParent = new Node(null);
-                newParent.setId(augmentedRegex.charAt(i));
-
-                Node newChild = new Node(newParent);
-                root.setParent(newParent);
-
-                newChild.setLeftChild(newChild);
-
-                root = newParent;
-
-            }
-            else
-            {
-                System.out.println("Found ID, continuing");
-            }
-
-        }
-        return root;
-    }
-
-}
-*/
